@@ -14,6 +14,7 @@ Your AI-powered German learning companion! Learn German from A1 to B2 with inter
 - **🎭 Roleplay Scenarios** - Café, shopping, directions, doctor, job interview, debates
 - **🧠 LLM Integration** - Ollama support (Mistral/Llama) with mock fallback
 - **💾 Local Database** - All your data stored securely on your machine
+- **🌐 GitHub Pages Dashboard** - Public stats page with real-time updates
 
 ### 🚧 Coming Soon
 - **🗣️ Speech Recognition** (Whisper) - Speak instead of type
@@ -21,7 +22,6 @@ Your AI-powered German learning companion! Learn German from A1 to B2 with inter
 - **👂 Listening Comprehension** - German TTS audio exercises
 - **🖼️ Multimodal Learning** - Image-based exercises
 - **📄 PDF Import** - Automatic extraction from your materials
-- **🌐 GitHub Pages Dashboard** - Public stats page
 
 ---
 
@@ -162,6 +162,88 @@ Practice real German conversations with Otto through roleplay scenarios!
 
 ---
 
+## 🌐 GitHub Pages Dashboard
+
+Track your German learning progress publicly with the automated stats dashboard!
+
+### 📊 What's Included:
+
+The dashboard displays:
+- **Overview Cards:** Current level, total XP, streak, and hours studied
+- **CEFR Progress Bars:** Visual progress through A1 → A2 → B1 → B2
+- **Vocabulary Stats:** Words learned by level, mastery rate, accuracy
+- **Daily Activity Chart:** Last 30 days of study time and XP (Chart.js)
+- **Achievements Grid:** All unlocked achievements with icons
+- **Milestones:** Major accomplishments (100 words, 7-day streak, etc.)
+
+### 🚀 Setup Instructions:
+
+#### 1. **Enable GitHub Pages**
+   - Go to your repository on GitHub
+   - Click **Settings** → **Pages**
+   - Under "Source", select **Deploy from a branch**
+   - Branch: Select your main branch (or the branch with the `docs/` folder)
+   - Folder: Select **`/docs`**
+   - Click **Save**
+
+#### 2. **Configure Auto-Push (Optional)**
+
+   Edit `app/config.py` to customize the auto-push settings:
+   ```python
+   GITHUB_CONFIG = {
+       'auto_push': True,  # Enable/disable auto-push
+       'branch': 'your-branch-name',  # Branch to push to
+       'max_retries': 4,
+       'retry_delays': [2, 4, 8, 16]  # Exponential backoff
+   }
+   ```
+
+#### 3. **Export and Push Stats**
+
+   **Manual Export:**
+   ```bash
+   python scripts/export_and_push_stats.py
+   ```
+
+   This will:
+   - ✅ Export your stats to `docs/data/stats.json`
+   - ✅ Commit the changes
+   - ✅ Push to GitHub (with retry logic)
+   - ✅ Display your dashboard URL
+
+   **Automatic Export (Coming Soon):**
+   The app will automatically export stats after each session!
+
+#### 4. **View Your Dashboard**
+
+   After GitHub Pages builds (1-2 minutes), visit:
+   ```
+   https://YOUR-USERNAME.github.io/German-learning-Tool/
+   ```
+
+### 🎨 Dashboard Features:
+
+- **Dark Theme:** Matches the Streamlit app's color scheme
+- **Responsive Design:** Works on desktop, tablet, and mobile
+- **Chart.js Visualizations:** Interactive charts for activity tracking
+- **Real-time Updates:** Stats refresh whenever you push new data
+- **Anonymized Data:** No personal information, just learning progress
+- **Zero Configuration:** Works out of the box!
+
+### 📈 What Gets Tracked:
+
+✅ **Overview:** Level, XP, streak, hours, CEFR estimate
+✅ **Vocabulary:** Total words, by level, mastered, accuracy
+✅ **Skills:** Speaking hours/sessions, writing count/scores
+✅ **Daily Activity:** Last 30 days (minutes, XP, words, exercises)
+✅ **Achievements:** All unlocked achievements with dates
+✅ **Exam Results:** Mock exam scores and pass/fail status
+✅ **Milestones:** Major accomplishments
+
+❌ **NOT Tracked:** Personal info, specific word lists, audio recordings
+
+---
+
 ## 🗂️ Project Structure
 
 ```
@@ -169,25 +251,37 @@ German-learning-Tool/
 ├── app/                          # Main application code
 │   ├── main.py                   # Streamlit entry point
 │   ├── config.py                 # Configuration settings
+│   ├── analytics/                # Stats export system
+│   │   └── exporter.py
 │   ├── buddy/                    # Otto's personality
-│   │   └── personality.py
+│   │   ├── personality.py
+│   │   └── conversation.py
 │   ├── database/                 # Database management
 │   │   ├── schema.sql
 │   │   └── db_manager.py
 │   ├── gamification/             # XP, levels, SRS
 │   │   ├── xp_system.py
 │   │   └── srs.py
-│   └── learning/                 # Learning modules
-│       └── vocabulary.py
+│   ├── learning/                 # Learning modules
+│   │   └── vocabulary.py
+│   └── models/                   # LLM integration
+│       └── llm_manager.py
 ├── data/                         # Local data storage
 │   ├── database.db               # SQLite database
 │   ├── audio_recordings/         # Audio files (NOT synced)
 │   └── models/                   # AI models
 ├── content/                      # Learning materials
-│   ├── vocabulary/               # Word lists
+│   ├── vocabulary/               # Word lists (98 A1 words)
 │   └── exercises/                # Exercises
+├── docs/                         # GitHub Pages dashboard
+│   ├── index.html                # Dashboard HTML
+│   ├── css/style.css             # Dark theme styling
+│   ├── js/stats.js               # Chart.js visualizations
+│   └── data/stats.json           # Exported statistics
+├── scripts/                      # Utility scripts
+│   ├── import_vocabulary.py
+│   └── export_and_push_stats.py
 ├── Course Materials/             # Your PDF materials
-├── docs/                         # GitHub Pages (future)
 └── requirements.txt
 ```
 
@@ -328,21 +422,23 @@ pip install --upgrade -r requirements.txt
 
 ## 🔮 Roadmap
 
+### ✅ Phase 1: Foundation (Complete)
+- [x] Vocabulary system with SRS
+- [x] Quiz mode with multiple choice
+- [x] Gamification (XP, levels, achievements)
+- [x] Conversation partner with roleplay scenarios
+- [x] LLM integration (Ollama)
+- [x] GitHub Pages dashboard with real-time stats
+
 ### Phase 2: Core Learning Features (In Progress)
 - [ ] Whisper integration for speech recognition
 - [ ] Writing exercises with LLM corrections
 - [ ] Listening comprehension module
 
 ### Phase 3: Advanced Features
-- [ ] Conversation partner with roleplay scenarios
 - [ ] Vision model for image-based exercises
 - [ ] PDF processing pipeline
-- [ ] Mock exam system
-
-### Phase 4: GitHub Pages Dashboard
-- [ ] Real-time stats export
-- [ ] Public progress dashboard
-- [ ] Automated git push after sessions
+- [ ] Mock exam system with A1-B2 tests
 
 ---
 
