@@ -1,0 +1,147 @@
+{
+  "name": "A1 Common Verbs",
+  "description": "Essential everyday verbs",
+  "cefr_level": "A1",
+  "words": [
+    {
+      "word": "sein",
+      "translation": "to be",
+      "part_of_speech": "verb",
+      "example_sentence": "Ich bin müde.",
+      "example_translation": "I am tired."
+    },
+    {
+      "word": "haben",
+      "translation": "to have",
+      "part_of_speech": "verb",
+      "example_sentence": "Ich habe einen Hund.",
+      "example_translation": "I have a dog."
+    },
+    {
+      "word": "machen",
+      "translation": "to do / to make",
+      "part_of_speech": "verb",
+      "example_sentence": "Was machst du?",
+      "example_translation": "What are you doing?"
+    },
+    {
+      "word": "sagen",
+      "translation": "to say",
+      "part_of_speech": "verb",
+      "example_sentence": "Was sagst du?",
+      "example_translation": "What are you saying?"
+    },
+    {
+      "word": "wohnen",
+      "translation": "to live / to reside",
+      "part_of_speech": "verb",
+      "example_sentence": "Ich wohne in Berlin.",
+      "example_translation": "I live in Berlin."
+    },
+    {
+      "word": "arbeiten",
+      "translation": "to work",
+      "part_of_speech": "verb",
+      "example_sentence": "Er arbeitet in München.",
+      "example_translation": "He works in Munich."
+    },
+    {
+      "word": "spielen",
+      "translation": "to play",
+      "part_of_speech": "verb",
+      "example_sentence": "Die Kinder spielen im Park.",
+      "example_translation": "The children play in the park."
+    },
+    {
+      "word": "schlafen",
+      "translation": "to sleep",
+      "part_of_speech": "verb",
+      "example_sentence": "Ich schlafe acht Stunden.",
+      "example_translation": "I sleep eight hours."
+    },
+    {
+      "word": "lesen",
+      "translation": "to read",
+      "part_of_speech": "verb",
+      "example_sentence": "Ich lese ein Buch.",
+      "example_translation": "I read a book."
+    },
+    {
+      "word": "schreiben",
+      "translation": "to write",
+      "part_of_speech": "verb",
+      "example_sentence": "Er schreibt einen Brief.",
+      "example_translation": "He writes a letter."
+    },
+    {
+      "word": "sehen",
+      "translation": "to see",
+      "part_of_speech": "verb",
+      "example_sentence": "Ich sehe einen Vogel.",
+      "example_translation": "I see a bird."
+    },
+    {
+      "word": "hören",
+      "translation": "to hear / to listen",
+      "part_of_speech": "verb",
+      "example_sentence": "Ich höre Musik.",
+      "example_translation": "I listen to music."
+    },
+    {
+      "word": "kaufen",
+      "translation": "to buy",
+      "part_of_speech": "verb",
+      "example_sentence": "Ich kaufe Brot.",
+      "example_translation": "I buy bread."
+    },
+    {
+      "word": "kochen",
+      "translation": "to cook",
+      "part_of_speech": "verb",
+      "example_sentence": "Meine Mutter kocht gut.",
+      "example_translation": "My mother cooks well."
+    },
+    {
+      "word": "lieben",
+      "translation": "to love",
+      "part_of_speech": "verb",
+      "example_sentence": "Ich liebe meine Familie.",
+      "example_translation": "I love my family."
+    },
+    {
+      "word": "mögen",
+      "translation": "to like",
+      "part_of_speech": "verb",
+      "example_sentence": "Ich mag Schokolade.",
+      "example_translation": "I like chocolate."
+    },
+    {
+      "word": "wollen",
+      "translation": "to want",
+      "part_of_speech": "verb",
+      "example_sentence": "Ich will nach Hause gehen.",
+      "example_translation": "I want to go home."
+    },
+    {
+      "word": "können",
+      "translation": "to can / to be able to",
+      "part_of_speech": "verb",
+      "example_sentence": "Ich kann Deutsch sprechen.",
+      "example_translation": "I can speak German."
+    },
+    {
+      "word": "müssen",
+      "translation": "to must / to have to",
+      "part_of_speech": "verb",
+      "example_sentence": "Ich muss lernen.",
+      "example_translation": "I must study."
+    },
+    {
+      "word": "verstehen",
+      "translation": "to understand",
+      "part_of_speech": "verb",
+      "example_sentence": "Verstehst du das?",
+      "example_translation": "Do you understand that?"
+    }
+  ]
+}

@@ -1,0 +1,115 @@
+{
+  "name": "A1 Numbers and Time",
+  "description": "Essential numbers and time-related vocabulary",
+  "cefr_level": "A1",
+  "words": [
+    {
+      "word": "eins",
+      "translation": "one",
+      "part_of_speech": "number",
+      "example_sentence": "Ich habe eins Buch.",
+      "example_translation": "I have one book."
+    },
+    {
+      "word": "zwei",
+      "translation": "two",
+      "part_of_speech": "number",
+      "example_sentence": "Zwei Kinder spielen.",
+      "example_translation": "Two children are playing."
+    },
+    {
+      "word": "drei",
+      "translation": "three",
+      "part_of_speech": "number",
+      "example_sentence": "Ich bin drei Jahre alt.",
+      "example_translation": "I am three years old."
+    },
+    {
+      "word": "vier",
+      "translation": "four",
+      "part_of_speech": "number",
+      "example_sentence": "Die Familie hat vier Personen.",
+      "example_translation": "The family has four people."
+    },
+    {
+      "word": "fünf",
+      "translation": "five",
+      "part_of_speech": "number",
+      "example_sentence": "Es ist fünf Uhr.",
+      "example_translation": "It is five o'clock."
+    },
+    {
+      "word": "sechs",
+      "translation": "six",
+      "part_of_speech": "number",
+      "example_sentence": "Sechs plus vier ist zehn.",
+      "example_translation": "Six plus four is ten."
+    },
+    {
+      "word": "sieben",
+      "translation": "seven",
+      "part_of_speech": "number",
+      "example_sentence": "Eine Woche hat sieben Tage.",
+      "example_translation": "A week has seven days."
+    },
+    {
+      "word": "acht",
+      "translation": "eight",
+      "part_of_speech": "number",
+      "example_sentence": "Ich schlafe acht Stunden.",
+      "example_translation": "I sleep eight hours."
+    },
+    {
+      "word": "neun",
+      "translation": "nine",
+      "part_of_speech": "number",
+      "example_sentence": "Die Schule beginnt um neun.",
+      "example_translation": "School starts at nine."
+    },
+    {
+      "word": "zehn",
+      "translation": "ten",
+      "part_of_speech": "number",
+      "example_sentence": "Ich habe zehn Finger.",
+      "example_translation": "I have ten fingers."
+    },
+    {
+      "word": "die Uhr",
+      "translation": "the clock / o'clock",
+      "part_of_speech": "noun",
+      "gender": "die",
+      "plural_form": "die Uhren",
+      "example_sentence": "Wie viel Uhr ist es?",
+      "example_translation": "What time is it?"
+    },
+    {
+      "word": "die Zeit",
+      "translation": "the time",
+      "part_of_speech": "noun",
+      "gender": "die",
+      "example_sentence": "Ich habe keine Zeit.",
+      "example_translation": "I have no time."
+    },
+    {
+      "word": "heute",
+      "translation": "today",
+      "part_of_speech": "adverb",
+      "example_sentence": "Heute ist Montag.",
+      "example_translation": "Today is Monday."
+    },
+    {
+      "word": "morgen",
+      "translation": "tomorrow",
+      "part_of_speech": "adverb",
+      "example_sentence": "Morgen gehe ich zur Schule.",
+      "example_translation": "Tomorrow I go to school."
+    },
+    {
+      "word": "gestern",
+      "translation": "yesterday",
+      "part_of_speech": "adverb",
+      "example_sentence": "Gestern war Sonntag.",
+      "example_translation": "Yesterday was Sunday."
+    }
+  ]
+}
