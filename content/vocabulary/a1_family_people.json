@@ -1,0 +1,141 @@
+{
+  "name": "A1 Family and People",
+  "description": "Family members and people-related vocabulary",
+  "cefr_level": "A1",
+  "words": [
+    {
+      "word": "die Familie",
+      "translation": "the family",
+      "part_of_speech": "noun",
+      "gender": "die",
+      "plural_form": "die Familien",
+      "example_sentence": "Meine Familie ist groß.",
+      "example_translation": "My family is big."
+    },
+    {
+      "word": "die Mutter",
+      "translation": "the mother",
+      "part_of_speech": "noun",
+      "gender": "die",
+      "plural_form": "die Mütter",
+      "example_sentence": "Meine Mutter heißt Maria.",
+      "example_translation": "My mother's name is Maria."
+    },
+    {
+      "word": "der Vater",
+      "translation": "the father",
+      "part_of_speech": "noun",
+      "gender": "der",
+      "plural_form": "die Väter",
+      "example_sentence": "Der Vater arbeitet viel.",
+      "example_translation": "The father works a lot."
+    },
+    {
+      "word": "der Bruder",
+      "translation": "the brother",
+      "part_of_speech": "noun",
+      "gender": "der",
+      "plural_form": "die Brüder",
+      "example_sentence": "Mein Bruder ist zehn Jahre alt.",
+      "example_translation": "My brother is ten years old."
+    },
+    {
+      "word": "die Schwester",
+      "translation": "the sister",
+      "part_of_speech": "noun",
+      "gender": "die",
+      "plural_form": "die Schwestern",
+      "example_sentence": "Ich habe eine Schwester.",
+      "example_translation": "I have a sister."
+    },
+    {
+      "word": "die Eltern",
+      "translation": "the parents",
+      "part_of_speech": "noun",
+      "gender": "die",
+      "example_sentence": "Meine Eltern sind nett.",
+      "example_translation": "My parents are nice."
+    },
+    {
+      "word": "der Sohn",
+      "translation": "the son",
+      "part_of_speech": "noun",
+      "gender": "der",
+      "plural_form": "die Söhne",
+      "example_sentence": "Das ist mein Sohn.",
+      "example_translation": "This is my son."
+    },
+    {
+      "word": "die Tochter",
+      "translation": "the daughter",
+      "part_of_speech": "noun",
+      "gender": "die",
+      "plural_form": "die Töchter",
+      "example_sentence": "Sie hat eine Tochter.",
+      "example_translation": "She has a daughter."
+    },
+    {
+      "word": "der Großvater",
+      "translation": "the grandfather",
+      "part_of_speech": "noun",
+      "gender": "der",
+      "plural_form": "die Großväter",
+      "example_sentence": "Mein Großvater ist alt.",
+      "example_translation": "My grandfather is old."
+    },
+    {
+      "word": "die Großmutter",
+      "translation": "the grandmother",
+      "part_of_speech": "noun",
+      "gender": "die",
+      "plural_form": "die Großmütter",
+      "example_sentence": "Die Großmutter kocht gut.",
+      "example_translation": "Grandmother cooks well."
+    },
+    {
+      "word": "der Lehrer",
+      "translation": "the teacher (male)",
+      "part_of_speech": "noun",
+      "gender": "der",
+      "plural_form": "die Lehrer",
+      "example_sentence": "Der Lehrer ist freundlich.",
+      "example_translation": "The teacher is friendly."
+    },
+    {
+      "word": "die Lehrerin",
+      "translation": "the teacher (female)",
+      "part_of_speech": "noun",
+      "gender": "die",
+      "plural_form": "die Lehrerinnen",
+      "example_sentence": "Die Lehrerin erklärt gut.",
+      "example_translation": "The teacher explains well."
+    },
+    {
+      "word": "der Student",
+      "translation": "the student (male)",
+      "part_of_speech": "noun",
+      "gender": "der",
+      "plural_form": "die Studenten",
+      "example_sentence": "Ich bin Student.",
+      "example_translation": "I am a student."
+    },
+    {
+      "word": "die Studentin",
+      "translation": "the student (female)",
+      "part_of_speech": "noun",
+      "gender": "die",
+      "plural_form": "die Studentinnen",
+      "example_sentence": "Sie ist Studentin.",
+      "example_translation": "She is a student."
+    },
+    {
+      "word": "der Name",
+      "translation": "the name",
+      "part_of_speech": "noun",
+      "gender": "der",
+      "plural_form": "die Namen",
+      "example_sentence": "Wie ist dein Name?",
+      "example_translation": "What is your name?"
+    }
+  ]
+}

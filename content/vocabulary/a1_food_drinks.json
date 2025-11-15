@@ -1,0 +1,160 @@
+{
+  "name": "A1 Food and Drinks",
+  "description": "Common food and beverage vocabulary",
+  "cefr_level": "A1",
+  "words": [
+    {
+      "word": "das Essen",
+      "translation": "the food / meal",
+      "part_of_speech": "noun",
+      "gender": "das",
+      "example_sentence": "Das Essen ist lecker.",
+      "example_translation": "The food is delicious."
+    },
+    {
+      "word": "das Frühstück",
+      "translation": "the breakfast",
+      "part_of_speech": "noun",
+      "gender": "das",
+      "example_sentence": "Ich esse Frühstück um acht Uhr.",
+      "example_translation": "I eat breakfast at eight o'clock."
+    },
+    {
+      "word": "das Mittagessen",
+      "translation": "the lunch",
+      "part_of_speech": "noun",
+      "gender": "das",
+      "example_sentence": "Wir essen Mittagessen zusammen.",
+      "example_translation": "We eat lunch together."
+    },
+    {
+      "word": "das Abendessen",
+      "translation": "the dinner",
+      "part_of_speech": "noun",
+      "gender": "das",
+      "example_sentence": "Das Abendessen ist um sieben Uhr.",
+      "example_translation": "Dinner is at seven o'clock."
+    },
+    {
+      "word": "das Brot",
+      "translation": "the bread",
+      "part_of_speech": "noun",
+      "gender": "das",
+      "plural_form": "die Brote",
+      "example_sentence": "Ich esse Brot mit Butter.",
+      "example_translation": "I eat bread with butter."
+    },
+    {
+      "word": "der Käse",
+      "translation": "the cheese",
+      "part_of_speech": "noun",
+      "gender": "der",
+      "example_sentence": "Der Käse schmeckt gut.",
+      "example_translation": "The cheese tastes good."
+    },
+    {
+      "word": "die Milch",
+      "translation": "the milk",
+      "part_of_speech": "noun",
+      "gender": "die",
+      "example_sentence": "Ich trinke Milch zum Frühstück.",
+      "example_translation": "I drink milk for breakfast."
+    },
+    {
+      "word": "der Kaffee",
+      "translation": "the coffee",
+      "part_of_speech": "noun",
+      "gender": "der",
+      "example_sentence": "Mein Vater trinkt Kaffee.",
+      "example_translation": "My father drinks coffee."
+    },
+    {
+      "word": "der Tee",
+      "translation": "the tea",
+      "part_of_speech": "noun",
+      "gender": "der",
+      "plural_form": "die Tees",
+      "example_sentence": "Ich möchte Tee, bitte.",
+      "example_translation": "I would like tea, please."
+    },
+    {
+      "word": "der Saft",
+      "translation": "the juice",
+      "part_of_speech": "noun",
+      "gender": "der",
+      "plural_form": "die Säfte",
+      "example_sentence": "Der Saft ist frisch.",
+      "example_translation": "The juice is fresh."
+    },
+    {
+      "word": "das Bier",
+      "translation": "the beer",
+      "part_of_speech": "noun",
+      "gender": "das",
+      "plural_form": "die Biere",
+      "example_sentence": "Er trinkt ein Bier.",
+      "example_translation": "He drinks a beer."
+    },
+    {
+      "word": "der Apfel",
+      "translation": "the apple",
+      "part_of_speech": "noun",
+      "gender": "der",
+      "plural_form": "die Äpfel",
+      "example_sentence": "Der Apfel ist rot.",
+      "example_translation": "The apple is red."
+    },
+    {
+      "word": "die Banane",
+      "translation": "the banana",
+      "part_of_speech": "noun",
+      "gender": "die",
+      "plural_form": "die Bananen",
+      "example_sentence": "Ich esse eine Banane.",
+      "example_translation": "I eat a banana."
+    },
+    {
+      "word": "die Orange",
+      "translation": "the orange",
+      "part_of_speech": "noun",
+      "gender": "die",
+      "plural_form": "die Orangen",
+      "example_sentence": "Die Orange ist süß.",
+      "example_translation": "The orange is sweet."
+    },
+    {
+      "word": "das Ei",
+      "translation": "the egg",
+      "part_of_speech": "noun",
+      "gender": "das",
+      "plural_form": "die Eier",
+      "example_sentence": "Ich esse ein Ei.",
+      "example_translation": "I eat an egg."
+    },
+    {
+      "word": "der Fisch",
+      "translation": "the fish",
+      "part_of_speech": "noun",
+      "gender": "der",
+      "plural_form": "die Fische",
+      "example_sentence": "Wir essen Fisch heute.",
+      "example_translation": "We eat fish today."
+    },
+    {
+      "word": "das Fleisch",
+      "translation": "the meat",
+      "part_of_speech": "noun",
+      "gender": "das",
+      "example_sentence": "Das Fleisch ist teuer.",
+      "example_translation": "The meat is expensive."
+    },
+    {
+      "word": "die Schokolade",
+      "translation": "the chocolate",
+      "part_of_speech": "noun",
+      "gender": "die",
+      "example_sentence": "Kinder lieben Schokolade.",
+      "example_translation": "Children love chocolate."
+    }
+  ]
+}
