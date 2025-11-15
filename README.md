@@ -4,21 +4,23 @@ Your AI-powered German learning companion! Learn German from A1 to B2 with inter
 
 ## 🌟 Features
 
-### ✅ Currently Implemented (Phase 1)
-- **📚 Vocabulary Builder** with Spaced Repetition System (SRS)
-- **🎮 Gamification** - XP, Levels, Streaks, Achievements
+### ✅ Currently Implemented
+- **📚 Vocabulary System** - 98 A1 words with Spaced Repetition (SRS)
+- **🎯 Quiz Mode** - Multiple-choice testing with 4 answer options
+- **💬 Conversation Partner** - 7 AI roleplay scenarios (A1-B2)
 - **🤖 Otto von Lehrer** - Your encouraging AI learning buddy
+- **🎮 Gamification** - XP, Levels (1-70), Streaks, 20+ Achievements
 - **📊 Progress Tracking** - Comprehensive statistics and analytics
-- **🎯 Multiple Practice Modes** - Flashcards, Multiple Choice, Fill-in-the-Blank
+- **🎭 Roleplay Scenarios** - Café, shopping, directions, doctor, job interview, debates
+- **🧠 LLM Integration** - Ollama support (Mistral/Llama) with mock fallback
 - **💾 Local Database** - All your data stored securely on your machine
 
 ### 🚧 Coming Soon
-- **🗣️ Speech Recognition** (Whisper) - Practice speaking German
+- **🗣️ Speech Recognition** (Whisper) - Speak instead of type
 - **✍️ Writing Exercises** with AI corrections
 - **👂 Listening Comprehension** - German TTS audio exercises
-- **💬 Conversation Partner** - Roleplay scenarios with AI
 - **🖼️ Multimodal Learning** - Image-based exercises
-- **📄 PDF Import** - Process your German course materials
+- **📄 PDF Import** - Automatic extraction from your materials
 - **🌐 GitHub Pages Dashboard** - Public stats page
 
 ---
@@ -27,9 +29,25 @@ Your AI-powered German learning companion! Learn German from A1 to B2 with inter
 
 ### Prerequisites
 - Python 3.10+
-- NVIDIA GPU with CUDA support (for future AI models)
-- 16GB VRAM recommended (RTX 5080 or equivalent)
 - Git
+- **Optional:** Ollama (for AI-powered conversations - see below)
+- **Optional:** NVIDIA GPU with CUDA support (for future speech features)
+- **Optional:** 16GB VRAM recommended (RTX 5080 or equivalent)
+
+### Optional: Install Ollama for AI Conversations
+
+The Conversation Partner feature works with **mock responses** out of the box, but for real AI-powered conversations, install Ollama:
+
+**Windows:**
+1. Download Ollama from https://ollama.ai
+2. Run the installer
+3. Open PowerShell and pull a model:
+   ```powershell
+   ollama pull mistral:7b-instruct-q4_K_M
+   ```
+4. The app will automatically detect and use Ollama!
+
+**Note:** Mistral 7B (4-bit) uses ~4GB of VRAM. Llama 3.1 8B uses ~5GB.
 
 ### Installation
 
@@ -55,8 +73,11 @@ Your AI-powered German learning companion! Learn German from A1 to B2 with inter
    pip install -r requirements.txt
    ```
 
-4. **Initialize the database:**
-   The database will be created automatically on first run.
+4. **Import vocabulary:**
+   ```bash
+   python scripts/import_vocabulary.py
+   ```
+   This loads **98 A1 German words** to get you started!
 
 5. **Run the application:**
    ```bash
@@ -98,10 +119,38 @@ Your AI-powered German learning companion! Learn German from A1 to B2 with inter
   - **Easy** ⭐ - Very easy, longer interval
 - Earn XP for each review!
 
-#### 3. **Track Your Progress**
+#### 3. **Quiz Mode (Multiple Choice)**
+- Go to **Vocabulary → Quiz Mode**
+- Select your level and click **"Start Quiz"**
+- Answer multiple-choice questions (4 options per question)
+- Get instant feedback on correct/incorrect answers
+- **Correct answers** → Word marked as "good" in SRS (appears less)
+- **Wrong answers** → Word marked as "again" in SRS (more practice)
+- See your final score and earn XP!
+
+#### 4. **Track Your Progress**
 - Check the **sidebar** for real-time stats
 - Visit the **Statistics** page for detailed analytics
 - View your **Achievements** page to see unlocked rewards
+
+### Conversation Partner
+
+Practice real German conversations with Otto through roleplay scenarios!
+
+#### How to Use:
+1. Click **💬 Conversation** in the sidebar
+2. Select your CEFR level (A1-B2)
+3. Choose a scenario:
+   - **A1:** Greeting & Introduction, Ordering at Café, Shopping
+   - **A2:** Asking for Directions, At the Doctor
+   - **B1:** Job Interview
+   - **B2:** Discussing Current Events
+4. Chat with Otto in German (type your responses)
+5. Otto responds in-character based on the scenario
+6. End conversation to see your stats and earn XP!
+
+**With Ollama:** Get real AI-powered, context-aware responses
+**Without Ollama:** Use pre-programmed mock responses for practice
 
 ### Gamification System
 
