@@ -24,7 +24,7 @@ ollama>=0.1.0
 sacremoses>=0.0.53
 
 # Text-to-Speech
-TTS>=0.21.0  # Coqui TTS
+coqui-tts>=0.22.0  # Coqui TTS fork with pandas 2.0+ support
 
 # Image Processing
 pillow>=10.0.0
