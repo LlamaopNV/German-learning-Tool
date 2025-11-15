@@ -52,7 +52,7 @@ data/audio_recordings/**/*
 
 # Writing submissions (DO NOT SYNC)
 data/writing_submissions/**/*
-*.txt
+data/writing_submissions/*.txt
 
 # AI Models (too large for git)
 data/models/**/*
@@ -106,3 +106,4 @@ docs/_site/
 !docs/data/.gitkeep
 !data/.gitkeep
 !Course Materials/.gitkeep
+!requirements.txt
