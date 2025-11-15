@@ -17,6 +17,8 @@ from gamification.xp_system import get_xp_system
 from gamification.srs import get_srs
 from buddy.personality import get_otto
 from learning.vocabulary import get_vocabulary_learner
+from buddy.conversation import get_conversation_manager
+from models.llm_manager import get_llm
 from config import UI_CONFIG
 
 # Page configuration
@@ -33,6 +35,8 @@ xp_system = get_xp_system()
 srs = get_srs()
 otto = get_otto()
 vocab_learner = get_vocabulary_learner()
+conversation_manager = get_conversation_manager()
+llm = get_llm()
 
 # Initialize session state
 if 'page' not in st.session_state:
@@ -91,6 +95,10 @@ def render_sidebar():
 
         if st.button("📚 Vocabulary", use_container_width=True):
             st.session_state.page = 'vocabulary'
+            st.rerun()
+
+        if st.button("💬 Conversation", use_container_width=True):
+            st.session_state.page = 'conversation'
             st.rerun()
 
         if st.button("📊 Statistics", use_container_width=True):
@@ -623,6 +631,130 @@ def render_achievements_page():
                 st.progress(min(progress_pct / 100, 1.0), text=f"{ach['progress']}/{ach['requirement_value']}")
 
 
+def render_conversation_page():
+    """Render conversation practice page"""
+    st.title("💬 Conversation Partner")
+    st.markdown("### Practice German conversation with Otto!")
+
+    # Check if Ollama is available
+    ollama_available = llm.check_ollama_installed()
+    if not ollama_available:
+        st.warning("⚠️ Ollama not detected. Using mock responses for demonstration.")
+        st.info("📥 Install Ollama from https://ollama.ai for full AI-powered conversations!")
+
+    # Select CEFR level
+    cefr_level = st.selectbox(
+        "Choose your level:",
+        ["A1", "A2", "B1", "B2"],
+        index=0,
+        help="Select your German proficiency level"
+    )
+
+    # Get available scenarios for this level
+    scenarios = conversation_manager.get_scenarios_by_level(cefr_level)
+
+    if not scenarios:
+        st.info(f"No scenarios available for {cefr_level} level yet. Check back soon!")
+        return
+
+    # Display scenarios
+    st.markdown("#### Choose a scenario:")
+
+    # Scenario selection
+    if 'selected_scenario' not in st.session_state:
+        st.session_state.selected_scenario = None
+        st.session_state.conversation_active = False
+
+    if not st.session_state.conversation_active:
+        # Show scenario cards
+        for scenario in scenarios:
+            with st.expander(f"{scenario['name']}", expanded=False):
+                st.markdown(f"**{scenario['description']}**")
+                st.markdown(f"🎭 Otto's role: {scenario['otto_role']}")
+                st.markdown(f"📍 Setting: {scenario['setting']}")
+                st.markdown(f"🎯 Learn: {', '.join(scenario['learning_goals'])}")
+
+                if st.button(f"Start '{scenario['name']}'", key=f"start_{scenario['id']}"):
+                    # Start conversation
+                    result = conversation_manager.start_scenario(scenario['id'], cefr_level)
+                    st.session_state.selected_scenario = scenario
+                    st.session_state.conversation_active = True
+                    st.session_state.conversation_messages = []
+                    st.rerun()
+
+    else:
+        # Active conversation
+        scenario = st.session_state.selected_scenario
+
+        st.success(f"🎭 Scenario: {scenario['name']}")
+        st.info(f"📍 {scenario['setting']}")
+
+        # Display conversation history
+        st.markdown("### Conversation:")
+
+        history = conversation_manager.get_conversation_history()
+
+        for msg in history:
+            if msg['role'] == 'otto':
+                st.markdown(f"**🤖 Otto:** {msg['text']}")
+            else:
+                st.markdown(f"**👤 You:** {msg['text']}")
+
+        # User input
+        st.markdown("---")
+        user_input = st.text_input(
+            "Your response (in German):",
+            key="user_conv_input",
+            placeholder="Type your response in German..."
+        )
+
+        col1, col2 = st.columns([3, 1])
+
+        with col1:
+            if st.button("Send", type="primary", use_container_width=True):
+                if user_input.strip():
+                    # Add user message
+                    conversation_manager.add_user_message(user_input)
+
+                    # Generate Otto's response
+                    prompt = conversation_manager.build_conversation_prompt(user_input)
+                    otto_response = llm.generate_conversation_response(prompt, use_mistral=True)
+
+                    if otto_response:
+                        conversation_manager.add_otto_message(otto_response)
+
+                    # Clear input and rerun
+                    st.rerun()
+
+        with col2:
+            if st.button("End Conversation", use_container_width=True):
+                # End conversation
+                summary = conversation_manager.end_conversation()
+
+                st.session_state.conversation_active = False
+                st.session_state.selected_scenario = None
+
+                # Show summary
+                st.success("🎉 Conversation complete!")
+                st.markdown(f"**Messages exchanged:** {summary.get('total_messages', 0)}")
+                st.markdown(f"**Your messages:** {summary.get('user_messages', 0)}")
+
+                # Award XP (placeholder - integrate with xp_system later)
+                st.info("💫 +50 XP for conversation practice!")
+
+                st.rerun()
+
+        # Show corrections sidebar if any
+        corrections = conversation_manager.get_corrections()
+        if corrections:
+            with st.sidebar:
+                st.markdown("### 📝 Corrections")
+                for correction in corrections:
+                    st.warning(f"**You said:** {correction['user_text']}")
+                    st.success(f"**Better:** {correction['corrected_text']}")
+                    st.info(f"💡 {correction['explanation']}")
+
+
 def main():
     """Main application entry point"""
     # Render sidebar
@@ -633,6 +765,8 @@ def main():
         render_home_page()
     elif st.session_state.page == 'vocabulary':
         render_vocabulary_page()
+    elif st.session_state.page == 'conversation':
+        render_conversation_page()
     elif st.session_state.page == 'stats':
         render_stats_page()
     elif st.session_state.page == 'achievements':
