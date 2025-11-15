@@ -206,7 +206,7 @@ def render_vocabulary_page():
     st.title("📚 Vocabulary Practice")
 
     # Tab selection
-    tab1, tab2, tab3 = st.tabs(["Review Words", "Learn New Words", "Statistics"])
+    tab1, tab2, tab3, tab4 = st.tabs(["📝 Review Words", "🌟 Learn New", "🎯 Quiz Mode", "📊 Statistics"])
 
     with tab1:
         render_vocabulary_review()
@@ -215,6 +215,9 @@ def render_vocabulary_page():
         render_vocabulary_learn()
 
     with tab3:
+        render_vocabulary_quiz()
+
+    with tab4:
         render_vocabulary_stats()
 
 
@@ -391,6 +394,145 @@ def render_vocabulary_learn():
                 result = vocab_learner.learn_new_word(word['id'])
                 st.success(f"{result['feedback']} +{result['xp_gained']} XP")
                 st.rerun()
+
+
+def render_vocabulary_quiz():
+    """Render multiple-choice quiz mode"""
+    st.markdown("### 🎯 Multiple Choice Quiz")
+    st.info("Test your knowledge! Select the correct English translation for each German word.")
+
+    # Get learned words (words that have been seen at least once)
+    with vocab_learner.db.get_connection() as conn:
+        cursor = conn.cursor()
+        cursor.execute("""
+            SELECT * FROM vocabulary
+            WHERE times_seen > 0
+            ORDER BY RANDOM()
+            LIMIT 20
+        """)
+        learned_words = [dict(row) for row in cursor.fetchall()]
+
+    if not learned_words:
+        st.warning("📚 No words learned yet! Go to 'Learn New Words' tab first.")
+        return
+
+    st.success(f"🎓 Quiz ready with {len(learned_words)} words!")
+
+    # Start quiz session
+    if 'quiz_session_started' not in st.session_state:
+        if st.button("Start Quiz", type="primary", use_container_width=True):
+            session_info = vocab_learner.start_session(cefr_level='A1')
+            st.session_state.quiz_session_started = True
+            st.session_state.quiz_current_index = 0
+            st.session_state.quiz_words = learned_words
+            st.session_state.quiz_score = 0
+            st.session_state.quiz_answers = []
+            st.rerun()
+        return
+
+    # Quiz in progress
+    if st.session_state.quiz_current_index >= len(st.session_state.quiz_words):
+        # Quiz complete!
+        st.success("🎉 Quiz Complete!")
+
+        total_questions = len(st.session_state.quiz_words)
+        correct_answers = st.session_state.quiz_score
+        accuracy = (correct_answers / total_questions * 100) if total_questions > 0 else 0
+
+        col1, col2, col3 = st.columns(3)
+        with col1:
+            st.metric("Questions", total_questions)
+        with col2:
+            st.metric("Correct", correct_answers)
+        with col3:
+            st.metric("Accuracy", f"{accuracy:.0f}%")
+
+        # End session
+        summary = vocab_learner.end_session()
+        st.markdown(summary['otto_summary'])
+
+        # New achievements
+        if summary.get('new_achievements'):
+            st.balloons()
+            for ach in summary['new_achievements']:
+                st.markdown(otto.celebrate_achievement(ach))
+
+        if st.button("Start New Quiz"):
+            del st.session_state.quiz_session_started
+            del st.session_state.quiz_current_index
+            del st.session_state.quiz_words
+            del st.session_state.quiz_score
+            del st.session_state.quiz_answers
+            st.rerun()
+
+        return
+
+    # Current question
+    current_word = st.session_state.quiz_words[st.session_state.quiz_current_index]
+
+    # Progress
+    progress = (st.session_state.quiz_current_index + 1) / len(st.session_state.quiz_words)
+    st.progress(progress, text=f"Question {st.session_state.quiz_current_index + 1} of {len(st.session_state.quiz_words)}")
+
+    # Generate multiple choice question
+    quiz_question = vocab_learner.multiple_choice_mode(current_word, num_choices=4)
+
+    st.markdown("---")
+    st.markdown(f"## What does **{quiz_question['word']}** mean?")
+
+    if current_word.get('gender'):
+        st.caption(f"*{current_word['gender']} ({current_word.get('part_of_speech', '')})*")
+
+    # Show hint if available
+    if 'show_hint' not in st.session_state:
+        st.session_state.show_hint = False
+
+    if quiz_question['hint'] and not st.session_state.show_hint:
+        if st.button("💡 Show Hint"):
+            st.session_state.show_hint = True
+            st.rerun()
+
+    if st.session_state.show_hint and quiz_question['hint']:
+        st.info(f"📖 Example: {quiz_question['hint']}")
+
+    # Answer buttons
+    st.markdown("### Choose the correct translation:")
+
+    if 'answer_selected' not in st.session_state:
+        st.session_state.answer_selected = False
+        st.session_state.selected_answer = None
+
+    if not st.session_state.answer_selected:
+        # Show answer choices as buttons
+        for i, choice in enumerate(quiz_question['choices']):
+            if st.button(choice, key=f"choice_{i}", use_container_width=True):
+                st.session_state.answer_selected = True
+                st.session_state.selected_answer = choice
+                st.rerun()
+    else:
+        # Show result
+        is_correct = st.session_state.selected_answer == quiz_question['correct_answer']
+
+        if is_correct:
+            st.success(f"✅ Correct! {otto.get_encouragement('correct')}")
+            st.session_state.quiz_score += 1
+            # Update vocab as 'good' in SRS
+            result = vocab_learner.review_word(current_word['id'], "", 'good')
+        else:
+            st.error(f"❌ Not quite! The correct answer was: **{quiz_question['correct_answer']}**")
+            st.info(otto.get_encouragement('incorrect'))
+            # Update vocab as 'again' in SRS
+            result = vocab_learner.review_word(current_word['id'], "", 'again')
+
+        st.caption(f"+{result['xp_gained']} XP")
+
+        # Next button
+        if st.button("Next Question ➡️", type="primary", use_container_width=True):
+            st.session_state.quiz_current_index += 1
+            st.session_state.answer_selected = False
+            st.session_state.selected_answer = None
+            st.session_state.show_hint = False
+            st.rerun()
 
 
 def render_vocabulary_stats():

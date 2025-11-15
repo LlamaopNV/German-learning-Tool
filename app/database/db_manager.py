@@ -25,13 +25,15 @@ class DatabaseManager:
     @contextmanager
     def get_connection(self):
         """Context manager for database connections"""
-        conn = sqlite3.connect(self.db_path)
+        conn = sqlite3.connect(
+            self.db_path,
+            timeout=10.0,  # Wait up to 10 seconds if database is locked
+            isolation_level=None  # Autocommit mode
+        )
         conn.row_factory = sqlite3.Row  # Return rows as dictionaries
         try:
             yield conn
-            conn.commit()
         except Exception as e:
-            conn.rollback()
             raise e
         finally:
             conn.close()
