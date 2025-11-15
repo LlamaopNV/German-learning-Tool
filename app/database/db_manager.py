@@ -270,7 +270,9 @@ class DatabaseManager:
                 FROM vocabulary
             """)
             acc = cursor.fetchone()
-            accuracy = (acc['correct'] / acc['total_reviews'] * 100) if acc['total_reviews'] > 0 else 0
+            total_reviews = acc['total_reviews'] or 0
+            correct = acc['correct'] or 0
+            accuracy = (correct / total_reviews * 100) if total_reviews > 0 else 0
 
             return {
                 'total_words': total,
