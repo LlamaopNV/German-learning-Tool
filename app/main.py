@@ -45,6 +45,26 @@ if 'current_session' not in st.session_state:
     st.session_state.current_session = None
 if 'review_mode' not in st.session_state:
     st.session_state.review_mode = None
+if 'vocab_session_id' not in st.session_state:
+    st.session_state.vocab_session_id = None
+if 'vocab_session_stats' not in st.session_state:
+    st.session_state.vocab_session_stats = {
+        'words_learned': 0,
+        'reviews_completed': 0,
+        'correct_count': 0,
+        'incorrect_count': 0,
+        'xp_earned': 0
+    }
+
+# Restore session state to vocab_learner
+if st.session_state.vocab_session_id:
+    vocab_learner.current_session_id = st.session_state.vocab_session_id
+    vocab_learner.session_stats = st.session_state.vocab_session_stats
+
+
+def sync_vocab_session_stats():
+    """Sync vocabulary session stats back to session_state"""
+    st.session_state.vocab_session_stats = vocab_learner.session_stats
 
 
 def render_sidebar():
@@ -250,6 +270,8 @@ def render_vocabulary_review():
             st.session_state.vocab_session_started = True
             st.session_state.current_word_index = 0
             st.session_state.review_words = review_words
+            # Save session ID to session state
+            st.session_state.vocab_session_id = session_info['session_id']
             st.rerun()
         return
 
@@ -258,6 +280,14 @@ def render_vocabulary_review():
         # Session complete
         st.success("🎉 Review session complete!")
         summary = vocab_learner.end_session()
+
+        # Check if session ended successfully
+        if 'error' in summary:
+            st.warning(f"⚠️ {summary['error']}")
+            if st.button("Start New Session"):
+                st.session_state.vocab_session_started = False
+                st.rerun()
+            return
 
         st.markdown(summary['otto_summary'])
 
@@ -271,7 +301,7 @@ def render_vocabulary_review():
             st.metric("XP Earned", summary['session_stats']['xp_earned'])
 
         # New achievements
-        if summary['new_achievements']:
+        if summary.get('new_achievements'):
             st.balloons()
             for ach in summary['new_achievements']:
                 st.markdown(otto.celebrate_achievement(ach))
@@ -280,6 +310,7 @@ def render_vocabulary_review():
             del st.session_state.vocab_session_started
             del st.session_state.current_word_index
             del st.session_state.review_words
+            st.session_state.vocab_session_id = None
             st.rerun()
 
         return
@@ -323,6 +354,7 @@ def render_vocabulary_review():
         with col1:
             if st.button("❌ Again", use_container_width=True):
                 result = vocab_learner.review_word(current_word['id'], "", 'again')
+                sync_vocab_session_stats()
                 st.session_state.last_result = result
                 st.session_state.current_word_index += 1
                 st.session_state.show_answer = False
@@ -331,6 +363,7 @@ def render_vocabulary_review():
         with col2:
             if st.button("😐 Hard", use_container_width=True):
                 result = vocab_learner.review_word(current_word['id'], "", 'hard')
+                sync_vocab_session_stats()
                 st.session_state.last_result = result
                 st.session_state.current_word_index += 1
                 st.session_state.show_answer = False
@@ -339,6 +372,7 @@ def render_vocabulary_review():
         with col3:
             if st.button("✅ Good", use_container_width=True):
                 result = vocab_learner.review_word(current_word['id'], "", 'good')
+                sync_vocab_session_stats()
                 st.session_state.last_result = result
                 st.session_state.current_word_index += 1
                 st.session_state.show_answer = False
@@ -347,6 +381,7 @@ def render_vocabulary_review():
         with col4:
             if st.button("⭐ Easy", use_container_width=True):
                 result = vocab_learner.review_word(current_word['id'], "", 'easy')
+                sync_vocab_session_stats()
                 st.session_state.last_result = result
                 st.session_state.current_word_index += 1
                 st.session_state.show_answer = False
@@ -400,6 +435,7 @@ def render_vocabulary_learn():
 
             if st.button(f"✅ I've learned this word", key=f"learn_{word['id']}"):
                 result = vocab_learner.learn_new_word(word['id'])
+                sync_vocab_session_stats()
                 st.success(f"{result['feedback']} +{result['xp_gained']} XP")
                 st.rerun()
 
@@ -435,6 +471,8 @@ def render_vocabulary_quiz():
             st.session_state.quiz_words = learned_words
             st.session_state.quiz_score = 0
             st.session_state.quiz_answers = []
+            # Save session ID to session state
+            st.session_state.vocab_session_id = session_info['session_id']
             st.rerun()
         return
 
@@ -457,13 +495,18 @@ def render_vocabulary_quiz():
 
         # End session
         summary = vocab_learner.end_session()
-        st.markdown(summary['otto_summary'])
 
-        # New achievements
-        if summary.get('new_achievements'):
-            st.balloons()
-            for ach in summary['new_achievements']:
-                st.markdown(otto.celebrate_achievement(ach))
+        # Check if session ended successfully
+        if 'error' in summary:
+            st.warning(f"⚠️ {summary['error']}")
+        else:
+            st.markdown(summary['otto_summary'])
+
+            # New achievements
+            if summary.get('new_achievements'):
+                st.balloons()
+                for ach in summary['new_achievements']:
+                    st.markdown(otto.celebrate_achievement(ach))
 
         if st.button("Start New Quiz"):
             del st.session_state.quiz_session_started
@@ -471,6 +514,7 @@ def render_vocabulary_quiz():
             del st.session_state.quiz_words
             del st.session_state.quiz_score
             del st.session_state.quiz_answers
+            st.session_state.vocab_session_id = None
             st.rerun()
 
         return
@@ -526,11 +570,13 @@ def render_vocabulary_quiz():
             st.session_state.quiz_score += 1
             # Update vocab as 'good' in SRS
             result = vocab_learner.review_word(current_word['id'], "", 'good')
+            sync_vocab_session_stats()
         else:
             st.error(f"❌ Not quite! The correct answer was: **{quiz_question['correct_answer']}**")
             st.info(otto.get_encouragement('incorrect'))
             # Update vocab as 'again' in SRS
             result = vocab_learner.review_word(current_word['id'], "", 'again')
+            sync_vocab_session_stats()
 
         st.caption(f"+{result['xp_gained']} XP")
 
