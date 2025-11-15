@@ -1,0 +1,62 @@
+# German Learning Tool - Requirements
+# Otto von Lehrer - Your AI German Learning Buddy
+
+# Core Framework
+streamlit>=1.28.0
+python-dotenv>=1.0.0
+
+# Deep Learning & AI
+torch>=2.1.0
+transformers>=4.35.0
+accelerate>=0.24.0
+bitsandbytes>=0.41.0
+sentencepiece>=0.1.99
+protobuf>=3.20.0
+
+# Speech Recognition
+faster-whisper>=0.10.0
+openai-whisper>=20231117  # Fallback
+
+# LLM Management
+ollama>=0.1.0
+
+# Translation
+sacremoses>=0.0.53
+
+# Text-to-Speech
+TTS>=0.21.0  # Coqui TTS
+
+# Image Processing
+pillow>=10.0.0
+opencv-python>=4.8.0
+
+# Data Processing
+pandas>=2.0.0
+numpy>=1.24.0
+scipy>=1.11.0
+
+# Web Scraping (optional)
+beautifulsoup4>=4.12.0
+requests>=2.31.0
+lxml>=4.9.0
+
+# Git Integration
+gitpython>=3.1.40
+
+# Audio Processing
+soundfile>=0.12.0
+librosa>=0.10.0
+pydub>=0.25.0
+
+# Database
+# sqlite3 is built-in to Python
+
+# Utilities
+tqdm>=4.66.0
+python-dateutil>=2.8.0
+pyyaml>=6.0.0
+
+# Development
+pytest>=7.4.0
+black>=23.0.0
+flake8>=6.0.0
