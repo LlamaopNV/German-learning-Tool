@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My German Learning Journey - Otto von Lehrer</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>🎓 My German Learning Journey</h1>
+            <p class="subtitle">Learning German from A1 to B2 with Otto von Lehrer</p>
+            <p class="last-updated">Last updated: <span id="lastUpdated">Loading...</span></p>
+        </header>
+
+        <!-- Overview Cards -->
+        <section class="overview-cards">
+            <div class="card">
+                <div class="card-icon">📊</div>
+                <div class="card-content">
+                    <h3 id="currentLevel">-</h3>
+                    <p>Current Level</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">⭐</div>
+                <div class="card-content">
+                    <h3 id="totalXP">-</h3>
+                    <p>Total XP</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">🔥</div>
+                <div class="card-content">
+                    <h3 id="currentStreak">-</h3>
+                    <p>Day Streak</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">⏱️</div>
+                <div class="card-content">
+                    <h3 id="totalHours">-</h3>
+                    <p>Hours Studied</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Progress Section -->
+        <section class="progress-section">
+            <div class="section-header">
+                <h2>📈 Learning Progress</h2>
+            </div>
+            <div class="progress-grid">
+                <div class="progress-card">
+                    <h3>CEFR Level Progress</h3>
+                    <div class="cefr-progress">
+                        <div class="cefr-level" id="cefrA1">
+                            <span class="cefr-label">A1</span>
+                            <div class="cefr-bar"><div class="cefr-fill"></div></div>
+                        </div>
+                        <div class="cefr-level" id="cefrA2">
+                            <span class="cefr-label">A2</span>
+                            <div class="cefr-bar"><div class="cefr-fill"></div></div>
+                        </div>
+                        <div class="cefr-level" id="cefrB1">
+                            <span class="cefr-label">B1</span>
+                            <div class="cefr-bar"><div class="cefr-fill"></div></div>
+                        </div>
+                        <div class="cefr-level" id="cefrB2">
+                            <span class="cefr-label">B2</span>
+                            <div class="cefr-bar"><div class="cefr-fill"></div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="progress-card">
+                    <h3>📚 Vocabulary</h3>
+                    <div class="vocab-stats">
+                        <p><strong id="totalWords">0</strong> words learned</p>
+                        <p><strong id="masteredWords">0</strong> mastered</p>
+                        <p><strong id="vocabAccuracy">0</strong>% accuracy</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Activity Chart -->
+        <section class="chart-section">
+            <div class="section-header">
+                <h2>📅 Daily Activity (Last 30 Days)</h2>
+            </div>
+            <div class="chart-container">
+                <canvas id="activityChart"></canvas>
+            </div>
+        </section>
+
+        <!-- Achievements -->
+        <section class="achievements-section">
+            <div class="section-header">
+                <h2>🏆 Achievements Unlocked</h2>
+            </div>
+            <div id="achievementsGrid" class="achievements-grid">
+                <!-- Achievements will be loaded here -->
+            </div>
+        </section>
+
+        <!-- Milestones -->
+        <section class="milestones-section">
+            <div class="section-header">
+                <h2>🎯 Milestones</h2>
+            </div>
+            <div id="milestonesList" class="milestones-list">
+                <!-- Milestones will be loaded here -->
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <p>Powered by <strong>Otto von Lehrer</strong> - AI German Learning Tool</p>
+            <p>Learning German through vocabulary, conversation, and gamification</p>
+            <p><a href="https://github.com/LlamaopNV/German-learning-Tool" target="_blank">View on GitHub</a></p>
+        </footer>
+    </div>
+
+    <script src="js/stats.js"></script>
+</body>
+</html>
