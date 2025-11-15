@@ -66,7 +66,7 @@ def render_sidebar():
 
         # XP Progress bar
         st.progress(
-            level_info['progress_percentage'] / 100,
+            min(level_info['progress_percentage'] / 100, 1.0),  # Cap at 100%
             text=f"{level_info['xp_progress']}/{level_info['xp_needed_for_next']} XP"
         )
 
@@ -700,30 +700,44 @@ def render_conversation_page():
             else:
                 st.markdown(f"**👤 You:** {msg['text']}")
 
+        # Check if we're waiting for Otto's response
+        if 'waiting_for_otto' not in st.session_state:
+            st.session_state.waiting_for_otto = False
+
+        # If waiting for Otto, show spinner and generate response
+        if st.session_state.waiting_for_otto:
+            with st.spinner("🤔 Otto is thinking..."):
+                prompt = conversation_manager.build_conversation_prompt(st.session_state.last_user_message)
+                otto_response = llm.generate_conversation_response(prompt, use_mistral=True)
+
+                if otto_response:
+                    conversation_manager.add_otto_message(otto_response)
+
+                st.session_state.waiting_for_otto = False
+                st.rerun()
+
         # User input
         st.markdown("---")
         user_input = st.text_input(
             "Your response (in German):",
             key="user_conv_input",
-            placeholder="Type your response in German..."
+            placeholder="Type your response in German...",
+            disabled=st.session_state.waiting_for_otto  # Disable while waiting
         )
 
         col1, col2 = st.columns([3, 1])
 
         with col1:
-            if st.button("Send", type="primary", use_container_width=True):
+            if st.button("Send", type="primary", use_container_width=True, disabled=st.session_state.waiting_for_otto):
                 if user_input.strip():
-                    # Add user message
+                    # Add user message immediately
                     conversation_manager.add_user_message(user_input)
 
-                    # Generate Otto's response
-                    prompt = conversation_manager.build_conversation_prompt(user_input)
-                    otto_response = llm.generate_conversation_response(prompt, use_mistral=True)
+                    # Mark that we're waiting for Otto
+                    st.session_state.waiting_for_otto = True
+                    st.session_state.last_user_message = user_input
 
-                    if otto_response:
-                        conversation_manager.add_otto_message(otto_response)
-
-                    # Clear input and rerun
+                    # Rerun to show user message and spinner
                     st.rerun()
 
         with col2:
@@ -733,6 +747,7 @@ def render_conversation_page():
 
                 st.session_state.conversation_active = False
                 st.session_state.selected_scenario = None
+                st.session_state.waiting_for_otto = False  # Reset waiting state
 
                 # Show summary
                 st.success("🎉 Conversation complete!")
