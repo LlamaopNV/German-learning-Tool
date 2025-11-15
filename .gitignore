@@ -1,0 +1,108 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environment
+venv/
+ENV/
+env/
+.venv
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Database
+data/database.db
+data/database.db-journal
+*.db
+*.db-journal
+*.sqlite
+*.sqlite3
+
+# Audio recordings (DO NOT SYNC)
+data/audio_recordings/**/*
+*.wav
+*.mp3
+*.ogg
+*.flac
+
+# Writing submissions (DO NOT SYNC)
+data/writing_submissions/**/*
+*.txt
+
+# AI Models (too large for git)
+data/models/**/*
+*.bin
+*.pt
+*.pth
+*.onnx
+*.safetensors
+
+# User-specific content
+Course Materials/*.pdf
+content/pdfs/*.pdf
+
+# Logs
+*.log
+logs/
+app.log
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+
+# Streamlit
+.streamlit/secrets.toml
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Environment variables
+.env
+.env.local
+
+# GitHub Pages build
+docs/.jekyll-cache/
+docs/_site/
+
+# Keep these files
+!.gitignore
+!.streamlit/config.toml
+!docs/data/.gitkeep
+!data/.gitkeep
+!Course Materials/.gitkeep

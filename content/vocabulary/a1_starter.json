@@ -1,0 +1,247 @@
+{
+  "name": "A1 Starter Vocabulary",
+  "description": "Essential German words for absolute beginners",
+  "cefr_level": "A1",
+  "words": [
+    {
+      "word": "Hallo",
+      "translation": "Hello",
+      "part_of_speech": "interjection",
+      "example_sentence": "Hallo, wie geht's?",
+      "example_translation": "Hello, how are you?"
+    },
+    {
+      "word": "danke",
+      "translation": "thank you",
+      "part_of_speech": "interjection",
+      "example_sentence": "Danke für deine Hilfe!",
+      "example_translation": "Thank you for your help!"
+    },
+    {
+      "word": "bitte",
+      "translation": "please / you're welcome",
+      "part_of_speech": "interjection",
+      "example_sentence": "Bitte, gern geschehen!",
+      "example_translation": "You're welcome!"
+    },
+    {
+      "word": "ja",
+      "translation": "yes",
+      "part_of_speech": "adverb",
+      "example_sentence": "Ja, das ist richtig.",
+      "example_translation": "Yes, that is correct."
+    },
+    {
+      "word": "nein",
+      "translation": "no",
+      "part_of_speech": "adverb",
+      "example_sentence": "Nein, ich verstehe nicht.",
+      "example_translation": "No, I don't understand."
+    },
+    {
+      "word": "der Mann",
+      "translation": "the man",
+      "part_of_speech": "noun",
+      "gender": "der",
+      "plural_form": "die Männer",
+      "example_sentence": "Der Mann ist groß.",
+      "example_translation": "The man is tall."
+    },
+    {
+      "word": "die Frau",
+      "translation": "the woman",
+      "part_of_speech": "noun",
+      "gender": "die",
+      "plural_form": "die Frauen",
+      "example_sentence": "Die Frau ist nett.",
+      "example_translation": "The woman is nice."
+    },
+    {
+      "word": "das Kind",
+      "translation": "the child",
+      "part_of_speech": "noun",
+      "gender": "das",
+      "plural_form": "die Kinder",
+      "example_sentence": "Das Kind spielt im Park.",
+      "example_translation": "The child plays in the park."
+    },
+    {
+      "word": "ich",
+      "translation": "I",
+      "part_of_speech": "pronoun",
+      "example_sentence": "Ich bin Student.",
+      "example_translation": "I am a student."
+    },
+    {
+      "word": "du",
+      "translation": "you (informal)",
+      "part_of_speech": "pronoun",
+      "example_sentence": "Du bist mein Freund.",
+      "example_translation": "You are my friend."
+    },
+    {
+      "word": "er",
+      "translation": "he",
+      "part_of_speech": "pronoun",
+      "example_sentence": "Er ist Lehrer.",
+      "example_translation": "He is a teacher."
+    },
+    {
+      "word": "sie",
+      "translation": "she / they",
+      "part_of_speech": "pronoun",
+      "example_sentence": "Sie ist meine Schwester.",
+      "example_translation": "She is my sister."
+    },
+    {
+      "word": "das Haus",
+      "translation": "the house",
+      "part_of_speech": "noun",
+      "gender": "das",
+      "plural_form": "die Häuser",
+      "example_sentence": "Das Haus ist groß.",
+      "example_translation": "The house is big."
+    },
+    {
+      "word": "die Schule",
+      "translation": "the school",
+      "part_of_speech": "noun",
+      "gender": "die",
+      "plural_form": "die Schulen",
+      "example_sentence": "Die Schule beginnt um 8 Uhr.",
+      "example_translation": "School starts at 8 o'clock."
+    },
+    {
+      "word": "der Tag",
+      "translation": "the day",
+      "part_of_speech": "noun",
+      "gender": "der",
+      "plural_form": "die Tage",
+      "example_sentence": "Heute ist ein schöner Tag.",
+      "example_translation": "Today is a beautiful day."
+    },
+    {
+      "word": "gut",
+      "translation": "good",
+      "part_of_speech": "adjective",
+      "example_sentence": "Das Wetter ist gut.",
+      "example_translation": "The weather is good."
+    },
+    {
+      "word": "schlecht",
+      "translation": "bad",
+      "part_of_speech": "adjective",
+      "example_sentence": "Das Essen ist schlecht.",
+      "example_translation": "The food is bad."
+    },
+    {
+      "word": "groß",
+      "translation": "big / tall",
+      "part_of_speech": "adjective",
+      "example_sentence": "Die Stadt ist sehr groß.",
+      "example_translation": "The city is very big."
+    },
+    {
+      "word": "klein",
+      "translation": "small",
+      "part_of_speech": "adjective",
+      "example_sentence": "Das Auto ist klein.",
+      "example_translation": "The car is small."
+    },
+    {
+      "word": "essen",
+      "translation": "to eat",
+      "part_of_speech": "verb",
+      "example_sentence": "Ich esse einen Apfel.",
+      "example_translation": "I eat an apple."
+    },
+    {
+      "word": "trinken",
+      "translation": "to drink",
+      "part_of_speech": "verb",
+      "example_sentence": "Wir trinken Wasser.",
+      "example_translation": "We drink water."
+    },
+    {
+      "word": "gehen",
+      "translation": "to go",
+      "part_of_speech": "verb",
+      "example_sentence": "Ich gehe zur Schule.",
+      "example_translation": "I go to school."
+    },
+    {
+      "word": "kommen",
+      "translation": "to come",
+      "part_of_speech": "verb",
+      "example_sentence": "Er kommt aus Deutschland.",
+      "example_translation": "He comes from Germany."
+    },
+    {
+      "word": "lernen",
+      "translation": "to learn",
+      "part_of_speech": "verb",
+      "example_sentence": "Ich lerne Deutsch.",
+      "example_translation": "I learn German."
+    },
+    {
+      "word": "sprechen",
+      "translation": "to speak",
+      "part_of_speech": "verb",
+      "example_sentence": "Du sprichst gut Deutsch!",
+      "example_translation": "You speak German well!"
+    },
+    {
+      "word": "die Katze",
+      "translation": "the cat",
+      "part_of_speech": "noun",
+      "gender": "die",
+      "plural_form": "die Katzen",
+      "example_sentence": "Die Katze ist süß.",
+      "example_translation": "The cat is cute."
+    },
+    {
+      "word": "der Hund",
+      "translation": "the dog",
+      "part_of_speech": "noun",
+      "gender": "der",
+      "plural_form": "die Hunde",
+      "example_sentence": "Der Hund bellt laut.",
+      "example_translation": "The dog barks loudly."
+    },
+    {
+      "word": "das Buch",
+      "translation": "the book",
+      "part_of_speech": "noun",
+      "gender": "das",
+      "plural_form": "die Bücher",
+      "example_sentence": "Das Buch ist interessant.",
+      "example_translation": "The book is interesting."
+    },
+    {
+      "word": "der Freund",
+      "translation": "the friend (male)",
+      "part_of_speech": "noun",
+      "gender": "der",
+      "plural_form": "die Freunde",
+      "example_sentence": "Mein Freund heißt Tom.",
+      "example_translation": "My friend's name is Tom."
+    },
+    {
+      "word": "die Freundin",
+      "translation": "the friend (female)",
+      "part_of_speech": "noun",
+      "gender": "die",
+      "plural_form": "die Freundinnen",
+      "example_sentence": "Meine Freundin kommt morgen.",
+      "example_translation": "My friend is coming tomorrow."
+    },
+    {
+      "word": "das Wasser",
+      "translation": "the water",
+      "part_of_speech": "noun",
+      "gender": "das",
+      "example_sentence": "Ich trinke Wasser.",
+      "example_translation": "I drink water."
+    }
+  ]
+}
