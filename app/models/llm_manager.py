@@ -22,12 +22,27 @@ class OllamaManager:
 
     def check_ollama_installed(self) -> bool:
         """Check if Ollama is installed and running"""
+        import platform
+        import requests
+
+        # Method 1: Try API endpoint (most reliable for Windows)
         try:
+            response = requests.get('http://localhost:11434/api/tags', timeout=2)
+            if response.status_code == 200:
+                return True
+        except:
+            pass
+
+        # Method 2: Try command line
+        try:
+            # On Windows, use shell=True to find ollama in PATH
+            is_windows = platform.system() == 'Windows'
             result = subprocess.run(
                 ['ollama', 'list'],
                 capture_output=True,
                 text=True,
-                timeout=5
+                timeout=5,
+                shell=is_windows
             )
             return result.returncode == 0
         except (subprocess.TimeoutExpired, FileNotFoundError):
@@ -35,17 +50,13 @@ class OllamaManager:
 
     def list_available_models(self) -> list:
         """List models available in Ollama"""
+        import requests
+
         try:
-            result = subprocess.run(
-                ['ollama', 'list'],
-                capture_output=True,
-                text=True,
-                timeout=5
-            )
-            if result.returncode == 0:
-                # Parse output
-                lines = result.stdout.strip().split('\n')[1:]  # Skip header
-                models = [line.split()[0] for line in lines if line.strip()]
+            response = requests.get('http://localhost:11434/api/tags', timeout=5)
+            if response.status_code == 200:
+                data = response.json()
+                models = [model['name'] for model in data.get('models', [])]
                 return models
             return []
         except Exception as e:
@@ -55,7 +66,7 @@ class OllamaManager:
     def generate(self, prompt: str, model_name: str = None,
                 temperature: float = None, max_tokens: int = None) -> Optional[str]:
         """
-        Generate text using Ollama
+        Generate text using Ollama via HTTP API
 
         Args:
             prompt: The input prompt
@@ -66,6 +77,8 @@ class OllamaManager:
         Returns:
             Generated text or None if error
         """
+        import requests
+
         # Use defaults from config if not specified
         if model_name is None:
             model_name = self.config['mistral']['model_name']
@@ -84,8 +97,9 @@ class OllamaManager:
                 max_tokens = self.config['llama']['max_tokens']
 
         try:
-            # Build Ollama command
-            cmd_input = {
+            # Call Ollama API endpoint
+            url = "http://localhost:11434/api/generate"
+            payload = {
                 "model": model_name,
                 "prompt": prompt,
                 "temperature": temperature,
@@ -93,24 +107,20 @@ class OllamaManager:
                 "stream": False
             }
 
-            # Call Ollama API via subprocess
-            result = subprocess.run(
-                ['ollama', 'run', model_name, '--format', 'json'],
-                input=prompt,
-                capture_output=True,
-                text=True,
-                timeout=60
-            )
+            response = requests.post(url, json=payload, timeout=60)
 
-            if result.returncode == 0:
-                # Ollama in non-streaming mode returns the generated text directly
-                return result.stdout.strip()
+            if response.status_code == 200:
+                result = response.json()
+                return result.get('response', '').strip()
             else:
-                print(f"Error from Ollama: {result.stderr}")
+                print(f"Error from Ollama API: {response.status_code} - {response.text}")
                 return None
 
-        except subprocess.TimeoutExpired:
+        except requests.exceptions.Timeout:
             print("Request to Ollama timed out")
+            return None
+        except requests.exceptions.ConnectionError:
+            print("Could not connect to Ollama. Is it running?")
             return None
         except Exception as e:
             print(f"Error generating text: {e}")
